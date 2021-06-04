@@ -1,0 +1,42 @@
+﻿@model F1_App.Models.Driver
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Driver</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StandingsPosition)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StandingsPosition)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Points)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Points)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeamName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
