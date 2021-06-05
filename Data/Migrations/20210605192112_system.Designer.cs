@@ -3,14 +3,16 @@ using F1_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace F1_App.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210605192112_system")]
+    partial class system
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,23 +38,6 @@ namespace F1_App.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Driver");
-                });
-
-            modelBuilder.Entity("F1_App.Models.SystemConfig", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CurrentRound");
-
-                    b.Property<int>("CurrentSeason");
-
-                    b.Property<bool>("QualifyingFin");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SystemConfig");
                 });
 
             modelBuilder.Entity("F1_App.Models.UserPredictions", b =>

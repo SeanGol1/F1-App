@@ -21,6 +21,7 @@ namespace F1_App.Data
 
         public DbSet<Driver> Driver { get; set; }
         public DbSet<UserPredictions> UserPredictions { get; set; }
+        public DbSet<SystemConfig> SystemConfig { get; set; }
 
 
 

@@ -194,13 +194,31 @@ namespace F1_App.Controllers
             string current = "";
             String URLString = "https://ergast.com/api/f1/2021/driverStandings";
             Driver driver = new Driver();
+            SystemConfig syscon = _context.SystemConfig
+                                        .FirstOrDefault(m => m.Id == 1);
             XmlTextReader reader = new XmlTextReader(URLString);
             while (reader.Read())
             {
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element: // The node is an element.                        
-                        
+
+                        if (reader.Name == "StandingsList") 
+                        {
+                            while (reader.MoveToNextAttribute())
+                            {
+                                if (reader.Name == "season")
+                                    syscon.CurrentSeason = Convert.ToInt32(reader.Value);
+                                else if (reader.Name == "round")
+                                    syscon.CurrentRound = (Convert.ToInt32(reader.Value) + 1);
+                            }                          
+                            
+                            
+                            
+                            _context.Update(syscon);
+                            _context.SaveChanges();
+                        }
+
                         //Filter through XML Data and create a Driver Object
                         if (reader.Name == "DriverStanding")
                         {
