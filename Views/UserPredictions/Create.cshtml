@@ -1,4 +1,4 @@
-﻿@model F1_App.Models.UserPredictions
+﻿@model IEnumerable<F1_App.Models.Driver>
 
 @{
     ViewData["Title"] = "Create";
@@ -10,36 +10,53 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <input asp-for="UserId" class="form-control" />
-                <span asp-validation-for="UserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DriverId" class="control-label"></label>
-                <input asp-for="DriverId" class="form-control" />
-                <span asp-validation-for="DriverId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Position" class="control-label"></label>
-                <input asp-for="Position" class="form-control" />
-                <span asp-validation-for="Position" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Season" class="control-label"></label>
-                <input asp-for="Season" class="form-control" />
-                <span asp-validation-for="Season" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Round" class="control-label"></label>
-                <input asp-for="Round" class="form-control" />
-                <span asp-validation-for="Round" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+        <form asp-action="Create" asp-controller="UserPredictions">
+            <!--<div asp-validation-summary="ModelOnly" class="text-danger"></div>-->
+
+            <ul class="list-group">
+                @for (int i = 0; i < 20; i++)
+                {
+                    <li class="list-group-item">
+                        <h3>Position @(i + 1)</h3>
+                        <select id="drivers" class="custom-select" style="width:200px;">
+                            <option value="-1" selected></option>
+                            @foreach (var item in Model)
+                            {
+                                <option value="@i">@item.GivenName @item.FamilyName</option>
+                            }
+                        </select>
+                    </li>
+                }
+            </ul>
+            <!--
+    <div class="form-group">
+        <label asp-for="UserId" class="control-label"></label>
+        <input asp-for="UserId" class="form-control" />
+        <span asp-validation-for="UserId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DriverId" class="control-label"></label>
+        <input asp-for="DriverId" class="form-control" />
+        <span asp-validation-for="DriverId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Position" class="control-label"></label>
+        <input asp-for="Position" class="form-control" />
+        <span asp-validation-for="Position" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Season" class="control-label"></label>
+        <input asp-for="Season" class="form-control" />
+        <span asp-validation-for="Season" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Round" class="control-label"></label>
+        <input asp-for="Round" class="form-control" />
+        <span asp-validation-for="Round" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>-->
         </form>
     </div>
 </div>

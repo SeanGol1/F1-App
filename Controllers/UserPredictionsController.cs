@@ -46,7 +46,13 @@ namespace F1_App.Controllers
         // GET: UserPredictions/Create
         public IActionResult Create()
         {
-            return View();
+            List<Driver> model = null;
+            var query = from d in _context.Driver
+                        orderby d.Points descending
+                        select d;
+            model = query.ToList();
+            //return View(await _context.Driver.ToListAsync());
+            return View(model);
         }
 
         // POST: UserPredictions/Create
