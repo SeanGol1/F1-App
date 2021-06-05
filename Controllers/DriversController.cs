@@ -211,10 +211,7 @@ namespace F1_App.Controllers
                                     syscon.CurrentSeason = Convert.ToInt32(reader.Value);
                                 else if (reader.Name == "round")
                                     syscon.CurrentRound = (Convert.ToInt32(reader.Value) + 1);
-                            }                          
-                            
-                            
-                            
+                            }         
                             _context.Update(syscon);
                             _context.SaveChanges();
                         }

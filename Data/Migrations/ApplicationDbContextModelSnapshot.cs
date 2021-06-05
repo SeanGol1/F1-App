@@ -38,6 +38,27 @@ namespace F1_App.Data.Migrations
                     b.ToTable("Driver");
                 });
 
+            modelBuilder.Entity("F1_App.Models.Race", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CircuitId");
+
+                    b.Property<string>("Country");
+
+                    b.Property<string>("Date");
+
+                    b.Property<string>("RaceName");
+
+                    b.Property<string>("Time");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Race");
+                });
+
             modelBuilder.Entity("F1_App.Models.SystemConfig", b =>
                 {
                     b.Property<int>("Id")
@@ -47,6 +68,8 @@ namespace F1_App.Data.Migrations
                     b.Property<int>("CurrentRound");
 
                     b.Property<int>("CurrentSeason");
+
+                    b.Property<int>("MyId");
 
                     b.Property<bool>("QualifyingFin");
 

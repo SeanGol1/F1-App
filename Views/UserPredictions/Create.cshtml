@@ -9,62 +9,53 @@
 <h4>UserPredictions</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" asp-controller="UserPredictions">
-            <!--<div asp-validation-summary="ModelOnly" class="text-danger"></div>-->
+    <form asp-action="Create" asp-controller="UserPredictions">
+        <!--<div asp-validation-summary="ModelOnly" class="text-danger"></div>-->
+        <div class="row">
+            <div class="col-md-6">
+                <ul class="list-group">
+                    @for (int i = 0; i < 20; i++)
+                    {
+                        <li class="list-group-item">
+                            <h3>Position @(i + 1)</h3>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <ul class="list-group" id="sortable">
+                    @foreach (var item in Model)
+                    {
+                        <li class="ui-state-default">
+                            <div class="row" >
+                                <div class="col-md-2">
+                                    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                                </div>
+                                <div class="col-md-10">
+                                    <h3><b>@item.StandingsPosition</b> - @item.GivenName @item.FamilyName</h3>
+                                    <h4>@item.TeamName</h4>
+                                    <h5>@item.Points Points</h5>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
 
-            <ul class="list-group">
-                @for (int i = 0; i < 20; i++)
-                {
-                    <li class="list-group-item">
-                        <h3>Position @(i + 1)</h3>
-                        <select id="drivers" class="custom-select" style="width:200px;">
-                            <option value="-1" selected></option>
-                            @foreach (var item in Model)
-                            {
-                                <option value="@i">@item.GivenName @item.FamilyName</option>
-                            }
-                        </select>
-                    </li>
-                }
-            </ul>
-            <!--
-    <div class="form-group">
-        <label asp-for="UserId" class="control-label"></label>
-        <input asp-for="UserId" class="form-control" />
-        <span asp-validation-for="UserId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="DriverId" class="control-label"></label>
-        <input asp-for="DriverId" class="form-control" />
-        <span asp-validation-for="DriverId" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Position" class="control-label"></label>
-        <input asp-for="Position" class="form-control" />
-        <span asp-validation-for="Position" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Season" class="control-label"></label>
-        <input asp-for="Season" class="form-control" />
-        <span asp-validation-for="Season" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Round" class="control-label"></label>
-        <input asp-for="Round" class="form-control" />
-        <span asp-validation-for="Round" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-default" />
-    </div>-->
-        </form>
-    </div>
+    </form>
 </div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+<script>
+      $( function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+  } );
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

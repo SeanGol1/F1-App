@@ -48,10 +48,10 @@ namespace F1_App.Controllers
         {
             List<Driver> model = null;
             var query = from d in _context.Driver
-                        orderby d.Points descending
+                        orderby d.StandingsPosition
                         select d;
             model = query.ToList();
-            //return View(await _context.Driver.ToListAsync());
+            
             return View(model);
         }
 

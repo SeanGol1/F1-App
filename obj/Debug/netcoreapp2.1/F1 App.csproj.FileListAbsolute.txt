@@ -2,7 +2,6 @@ C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\F1 App.csprojAssembly
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\F1 App.csproj.CoreCompileInputs.cache
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\F1 App.RazorAssemblyInfo.cache
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\F1 App.RazorAssemblyInfo.cs
-C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\F1 App.AssemblyInfoInputs.cache
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\F1 App.AssemblyInfo.cs
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\F1 App.RazorCoreGenerate.cache
@@ -43,3 +42,9 @@ C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Drivers\D
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Drivers\Details.g.cshtml.cs
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Drivers\Edit.g.cshtml.cs
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Drivers\Index.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Races\Create.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Races\Delete.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Races\Details.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Races\Edit.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Races\Index.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs

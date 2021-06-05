@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - F1_App</title>
-
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -31,6 +31,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Races" asp-action="Index">View Races</a></li>
                     <li><a asp-area="" asp-controller="Drivers" asp-action="Index">View Drivers</a></li>
                     <li><a asp-area="" asp-controller="UserPredictions" asp-action="Create">Make Predictions</a></li>
                 </ul>
@@ -45,7 +46,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2021 - F1_App</p>
+            <p>&copy; 2021 - F1 App</p>
         </footer>
     </div>
 

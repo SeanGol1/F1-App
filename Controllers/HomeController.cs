@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using F1_App.Models;
+using System.Xml;
 
 namespace F1_App.Controllers
 {
@@ -12,6 +13,7 @@ namespace F1_App.Controllers
     {
         public IActionResult Index()
         {
+            
             return View();
         }
 
