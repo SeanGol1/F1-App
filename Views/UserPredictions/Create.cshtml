@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
+    int editingNo = 0;
 }
 
 <h2>Create</h2>
@@ -12,35 +13,31 @@
     <form asp-action="Create" asp-controller="UserPredictions">
         <!--<div asp-validation-summary="ModelOnly" class="text-danger"></div>-->
         <div class="row">
+            <h2 id="editNo">@editingNo</h2>
             <div class="col-md-6">
-                <ul class="list-group">
-                    @for (int i = 0; i < 20; i++)
-                    {
-                        <li class="list-group-item">
-                            <h3>Position @(i + 1)</h3>
-                        </li>
-                    }
-                </ul>
-            </div>
-            <div class="col-md-6">
-                <ul class="list-group" id="sortable">
+                <ul class="list-group" id="DriverList">
                     @foreach (var item in Model)
                     {
-                        <li class="ui-state-default">
-                            <div class="row" >
-                                <div class="col-md-2">
-                                    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-                                </div>
+                        <li id="@(item.Id)_li" class="list-group-item driverItem">
+                            <div class="row">
+
                                 <div class="col-md-10">
                                     <h3><b>@item.StandingsPosition</b> - @item.GivenName @item.FamilyName</h3>
                                     <h4>@item.TeamName</h4>
                                     <h5>@item.Points Points</h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <input type="button" id="@item.Id" onClick="addDriver(this.id)" value="Add Driver" />
                                 </div>
                             </div>
                         </li>
                     }
                 </ul>
             </div>
+            <div class="col-md-6">
+                <ul id="PositionList" class="list-group"></ul>
+            </div>
+
         </div>
 
     </form>
@@ -51,10 +48,16 @@
     <a asp-action="Index">Back to List</a>
 </div>
 <script>
-      $( function() {
-    $( "#sortable" ).sortable();
-    $( "#sortable" ).disableSelection();
-  } );
+    //When Driver Is clicked add to a list.
+    function addDriver(id) {
+        var node = document.getElementById(id+"_li");
+        var list = document.getElementById("PositionList");
+        list.appendChild(node);
+        }
+
+
+
+
 </script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
