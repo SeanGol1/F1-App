@@ -64,13 +64,13 @@ namespace F1_App.Controllers
             public int position { get; set; }
         }
         [HttpPost]
-        public JsonResult getPosList([FromBody]List<Data> dataList)
+        public void getPosList([FromBody]List<Data> dataList)
         {
             foreach (var item in dataList)
             {
                 UserPredictions userPredictions = new UserPredictions();
 
-                
+
                 SystemConfig SessionDetails = GetCurrentSeasonRound();
                 if (ModelState.IsValid)
                 {
@@ -79,13 +79,26 @@ namespace F1_App.Controllers
                     userPredictions.Season = SessionDetails.CurrentSeason;
                     userPredictions.Round = SessionDetails.CurrentRound;
                     userPredictions.UserId = HttpContext.User.Identity.Name;
-                    _context.Add(userPredictions);
-                    _context.SaveChanges();                    
+                    int newId = GetIdUserPredictions(userPredictions);
+
+                    if (newId == 0)
+                    {                        
+                        _context.Add(userPredictions);
+                    }
+                    else
+                    {
+                        userPredictions.Id = newId;
+                        _context.Update(userPredictions);
+                    }
+                    _context.SaveChanges();
                 }
-               
+
             }
             RedirectToAction("Index", "Drivers");
-            return Json(true);
+
+            //return Json(true);
+            //return ;
+
         }
         // POST: UserPredictions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -95,7 +108,7 @@ namespace F1_App.Controllers
         public async Task<IActionResult> Create(Data item)
         {
             UserPredictions userPredictions = new UserPredictions();
-            
+
 
             SystemConfig SessionDetails = GetCurrentSeasonRound();
             if (ModelState.IsValid)
@@ -103,6 +116,7 @@ namespace F1_App.Controllers
                 userPredictions.Season = SessionDetails.CurrentSeason;
                 userPredictions.Round = SessionDetails.CurrentRound;
                 userPredictions.UserId = HttpContext.User.Identity.Name;
+                userPredictions.Id = GetIdUserPredictions(userPredictions);
                 _context.Add(userPredictions);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -193,6 +207,24 @@ namespace F1_App.Controllers
         private bool UserPredictionsExists(int id)
         {
             return _context.UserPredictions.Any(e => e.Id == id);
+        }
+
+        private int GetIdUserPredictions(UserPredictions up)
+        {
+            int Id = 0;
+            try
+            {
+                var query = from u in _context.UserPredictions
+                            where u.UserId == up.UserId && u.Season == up.Season && u.Round == up.Round && u.Position == up.Position
+                            select u.Id;
+                Id = query.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                                
+            }
+
+            return Id;
         }
         public SystemConfig GetCurrentSeasonRound()
         {

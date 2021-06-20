@@ -82,17 +82,12 @@
 
 
         $('#PositionList li').each(function (i) {
-            //$(this).attr('rel'); // This is your rel value
-            //var id = $(this).find('p').html();
             var data = {};
             var id = this.id;
             var position = i + 1;
             data.name = id;
             data.position = position;
             allData.push(data);
-            //dataname = 'Position' + (i + 1);
-            //data.Position1 = id;
-
         });
 
         
@@ -106,11 +101,8 @@
             },
             dataType: "json"
         });
-        /*
-        $.post("/UserPredictions/Create", { po1: 1 },
-                function () { alert('Successfully posted to server') });
 
-*/
+
 
     }
 </script>
