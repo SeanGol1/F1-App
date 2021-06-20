@@ -1,8 +1,13 @@
-﻿@model IEnumerable<F1_App.Models.Driver>
+﻿@model F1_App.Models.UserPredictions
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create";    
+    List<Driver> driverList = ViewBag.Drivers;
     int editingNo = 0;
+    int count = 1;
+
+    
+
 }
 
 <h2>Create</h2>
@@ -10,37 +15,46 @@
 <h4>UserPredictions</h4>
 <hr />
 <div class="row">
-    <form asp-action="Create" asp-controller="UserPredictions">
+    @*<form asp-action="Create" asp-controller="UserPredictions">*@
+        <button onclick="submit()">AJAX Submit</button>
+        
         <!--<div asp-validation-summary="ModelOnly" class="text-danger"></div>-->
         <div class="row">
             <h2 id="editNo">@editingNo</h2>
             <div class="col-md-6">
-                <ul class="list-group" id="DriverList">
-                    @foreach (var item in Model)
+                <ol class="list-group" id="DriverList">
+                    @foreach (var item in driverList)
                     {
-                        <li id="@(item.Id)_li" class="list-group-item driverItem">
-                            <div class="row">
-
-                                <div class="col-md-10">
-                                    <h3><b>@item.StandingsPosition</b> - @item.GivenName @item.FamilyName</h3>
-                                    <h4>@item.TeamName</h4>
-                                    <h5>@item.Points Points</h5>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="button" id="@item.Id" onClick="addDriver(this.id)" value="Add Driver" />
-                                </div>
+                    <li id="@(@item.Id)_li" class="list-group-item driverItem">
+                        <!--Put this line in with JS-->
+                        @*<input asp-for="Position1" name="drivername" value="@item.Id" class="form-control" />*@
+                        @*@Html.TextBoxFor(m => m.Position2, new { @class = "form-control", @value = item.Id })*@
+                        @*<p style="visibility:hidden;" id="position@(count)">@item.Id</p>*@
+                        <div class="row">
+                            <div class="col-md-10">
+                                <h3><b>@item.StandingsPosition</b> - @item.GivenName @item.FamilyName</h3>
+                                <h4>@item.TeamName</h4>
+                                <h5>@item.Points Points</h5>
                             </div>
-                        </li>
-                    }
-                </ul>
+                            <div class="col-md-2">
+                                <input type="button" name="@item.Id" id="@item.Id" onClick="addDriver(this.id)" value="Add Driver" />
+                            </div>
+                        </div>
+                    </li>
+                    }                       
+                </ol>
             </div>
             <div class="col-md-6">
-                <ul id="PositionList" class="list-group"></ul>
+                <ol id="PositionList" class="list-group"></ol>
             </div>
-
+            
         </div>
+        @*<input type="submit" value="Create" class="btn btn-default" />
 
-    </form>
+
+
+
+    </form>*@
 </div>
 
 
@@ -50,14 +64,55 @@
 <script>
     //When Driver Is clicked add to a list.
     function addDriver(id) {
-        var node = document.getElementById(id+"_li");
+        var node = document.getElementById(id + "_li");
+
         var list = document.getElementById("PositionList");
         list.appendChild(node);
-        }
+        var item = document.createElement("p");
+        $(item).attr("id", "@count");
+        $(item).attr("style", "visibility:hidden;");
+        @(count++)
+    }
 
 
 
+    function submit() {
+        
+        var allData = [];
 
+
+        $('#PositionList li').each(function (i) {
+            //$(this).attr('rel'); // This is your rel value
+            //var id = $(this).find('p').html();
+            var data = {};
+            var id = this.id;
+            var position = i + 1;
+            data.name = id;
+            data.position = position;
+            allData.push(data);
+            //dataname = 'Position' + (i + 1);
+            //data.Position1 = id;
+
+        });
+
+        
+        $.ajax({
+            type: "POST",
+            url: "/UserPredictions/getPosList",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(allData),
+            success: function (data) {
+                alert(data.Result);
+            },
+            dataType: "json"
+        });
+        /*
+        $.post("/UserPredictions/Create", { po1: 1 },
+                function () { alert('Successfully posted to server') });
+
+*/
+
+    }
 </script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

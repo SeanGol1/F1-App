@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using F1_App.Data;
 using F1_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace F1_App.Controllers
 {
@@ -44,6 +45,7 @@ namespace F1_App.Controllers
         }
 
         // GET: UserPredictions/Create
+        [Authorize]
         public IActionResult Create()
         {
             List<Driver> model = null;
@@ -51,19 +53,56 @@ namespace F1_App.Controllers
                         orderby d.StandingsPosition
                         select d;
             model = query.ToList();
-            
-            return View(model);
+            ViewBag.Drivers = model;
+
+            return View();
         }
 
+        public class Data
+        {
+            public string name { get; set; }
+            public int position { get; set; }
+        }
+        [HttpPost]
+        public JsonResult getPosList([FromBody]List<Data> dataList)
+        {
+            foreach (var item in dataList)
+            {
+                UserPredictions userPredictions = new UserPredictions();
+
+                
+                SystemConfig SessionDetails = GetCurrentSeasonRound();
+                if (ModelState.IsValid)
+                {
+                    userPredictions.DriverId = item.name;
+                    userPredictions.Position = item.position;
+                    userPredictions.Season = SessionDetails.CurrentSeason;
+                    userPredictions.Round = SessionDetails.CurrentRound;
+                    userPredictions.UserId = HttpContext.User.Identity.Name;
+                    _context.Add(userPredictions);
+                    _context.SaveChanges();                    
+                }
+               
+            }
+            RedirectToAction("Index", "Drivers");
+            return Json(true);
+        }
         // POST: UserPredictions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,DriverId,Position,Season,Round")] UserPredictions userPredictions)
+        public async Task<IActionResult> Create(Data item)
         {
+            UserPredictions userPredictions = new UserPredictions();
+            
+
+            SystemConfig SessionDetails = GetCurrentSeasonRound();
             if (ModelState.IsValid)
             {
+                userPredictions.Season = SessionDetails.CurrentSeason;
+                userPredictions.Round = SessionDetails.CurrentRound;
+                userPredictions.UserId = HttpContext.User.Identity.Name;
                 _context.Add(userPredictions);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -92,7 +131,7 @@ namespace F1_App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,DriverId,Position,Season,Round")] UserPredictions userPredictions)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Position1,Position2,Position3,Position4,Position5,Position6,Position7,Position8,Position9,Position10,Position11,Position12,Position13,Position14,Position15,Position16,Position17,Position18,Position19,Position20,Season,Round")] UserPredictions userPredictions)
         {
             if (id != userPredictions.Id)
             {
@@ -154,6 +193,12 @@ namespace F1_App.Controllers
         private bool UserPredictionsExists(int id)
         {
             return _context.UserPredictions.Any(e => e.Id == id);
+        }
+        public SystemConfig GetCurrentSeasonRound()
+        {
+            SystemConfig systemConfig = _context.SystemConfig.Find(1);
+
+            return systemConfig;
         }
     }
 }
