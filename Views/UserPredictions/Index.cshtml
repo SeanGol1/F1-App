@@ -13,9 +13,14 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserId)
+                Driver Name
             </th>
-           
+            <th>
+                Position
+            </th>
+            <th>
+                Possible Points
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Season)
             </th>
@@ -28,10 +33,16 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+
             <td>
-                @Html.DisplayFor(modelItem => item.UserId)
+                @Html.DisplayFor(modelItem => item.DriverId)
             </td>
-            
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PossiblePoints)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Season)
             </td>

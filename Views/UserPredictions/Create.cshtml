@@ -15,46 +15,46 @@
 <h4>UserPredictions</h4>
 <hr />
 <div class="row">
-    @*<form asp-action="Create" asp-controller="UserPredictions">*@
-        <button onclick="submit()">AJAX Submit</button>
-        
-        <!--<div asp-validation-summary="ModelOnly" class="text-danger"></div>-->
-        <div class="row">
-            <h2 id="editNo">@editingNo</h2>
-            <div class="col-md-6">
-                <ol class="list-group" id="DriverList">
-                    @foreach (var item in driverList)
-                    {
-                    <li id="@(@item.Id)_li" class="list-group-item driverItem">
-                        <!--Put this line in with JS-->
-                        @*<input asp-for="Position1" name="drivername" value="@item.Id" class="form-control" />*@
-                        @*@Html.TextBoxFor(m => m.Position2, new { @class = "form-control", @value = item.Id })*@
-                        @*<p style="visibility:hidden;" id="position@(count)">@item.Id</p>*@
+    
+    <button class="btn btn-primary" onclick="submit()">AJAX Submit</button>
+    <a class="btn btn-primary" asp-area="" asp-controller="UserPredictions" asp-action="Index">View Predictions</a>
+
+    <div class="row">
+        <h2 id="editNo">@editingNo</h2>
+        <div class="col-md-6">
+            <ol class="list-group" id="DriverList">
+                @foreach (var item in driverList)
+                {
+                    <li id="@(@item.Id)" class="list-group-item driverItem">                        
                         <div class="row">
-                            <div class="col-md-10">
+                            <div class="col-md-8">
                                 <h3><b>@item.StandingsPosition</b> - @item.GivenName @item.FamilyName</h3>
                                 <h4>@item.TeamName</h4>
                                 <h5>@item.Points Points</h5>
+                            </div>
+                            <div class="col-md-2">
+                                <input type="checkbox" id="@(item)_check" name="RedFlag" value="Red Flag">
+                                <label for="RedFlag">DNF</label><br>
                             </div>
                             <div class="col-md-2">
                                 <input type="button" name="@item.Id" id="@item.Id" onClick="addDriver(this.id)" value="Add Driver" />
                             </div>
                         </div>
                     </li>
-                    }                       
-                </ol>
-            </div>
-            <div class="col-md-6">
-                <ol id="PositionList" class="list-group"></ol>
-            </div>
-            
+                }
+            </ol>
         </div>
-        @*<input type="submit" value="Create" class="btn btn-default" />
+        <div class="col-md-6">
+            <ol id="PositionList" class="list-group"></ol>
+        </div>
+
+    </div>
+    @*<input type="submit" value="Create" class="btn btn-default" />
 
 
 
 
-    </form>*@
+        </form>*@
 </div>
 
 
@@ -64,7 +64,7 @@
 <script>
     //When Driver Is clicked add to a list.
     function addDriver(id) {
-        var node = document.getElementById(id + "_li");
+        var node = document.getElementById(id);
 
         var list = document.getElementById("PositionList");
         list.appendChild(node);
@@ -96,14 +96,27 @@
             url: "/UserPredictions/getPosList",
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(allData),
-            success: function (data) {
-                alert(data.Result);
+            success: function () {
+                sendToIndex();
+                //alert(data.Result);
             },
             dataType: "json"
         });
 
 
 
+        }
+
+    function sendToIndex() {
+            $.ajax({
+            type: "GET",
+            url: "/UserPredictions/Index",
+            success: function () {
+                
+                //alert(data.Result);
+            }
+            
+        });
     }
 </script>
 @section Scripts {

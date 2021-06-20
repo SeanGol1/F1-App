@@ -23,7 +23,15 @@ namespace F1_App.Controllers
         // GET: UserPredictions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.UserPredictions.ToListAsync());
+            string CUser = HttpContext.User.Identity.Name;
+            List<UserPredictions> model = null;
+            SystemConfig SessionDetails = GetCurrentSeasonRound();
+            var query = from u in _context.UserPredictions
+                        where u.UserId == CUser && u.Season == SessionDetails.CurrentSeason && u.Round == SessionDetails.CurrentRound 
+                        orderby u.Position
+                        select u;
+            model = query.ToList();
+            return View(model);
         }
 
         // GET: UserPredictions/Details/5
@@ -64,7 +72,7 @@ namespace F1_App.Controllers
             public int position { get; set; }
         }
         [HttpPost]
-        public void getPosList([FromBody]List<Data> dataList)
+        public ActionResult getPosList([FromBody]List<Data> dataList)
         {
             foreach (var item in dataList)
             {
@@ -80,6 +88,7 @@ namespace F1_App.Controllers
                     userPredictions.Round = SessionDetails.CurrentRound;
                     userPredictions.UserId = HttpContext.User.Identity.Name;
                     int newId = GetIdUserPredictions(userPredictions);
+                    userPredictions.PossiblePoints = getPossiblePoints(userPredictions);
 
                     if (newId == 0)
                     {                        
@@ -90,20 +99,24 @@ namespace F1_App.Controllers
                         userPredictions.Id = newId;
                         _context.Update(userPredictions);
                     }
-                    _context.SaveChanges();
+                    
                 }
 
             }
-            RedirectToAction("Index", "Drivers");
-
+            
+            //return RedirectToAction(nameof(Index));
             //return Json(true);
-            //return ;
+            _context.SaveChanges();
+            return RedirectToAction("Index", "UserPredictions");
+            //return RedirectToAction(nameof(Index));
 
         }
+
+        
         // POST: UserPredictions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Data item)
         {
@@ -123,7 +136,7 @@ namespace F1_App.Controllers
             }
             return View(userPredictions);
         }
-
+        */
         // GET: UserPredictions/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -145,7 +158,7 @@ namespace F1_App.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Position1,Position2,Position3,Position4,Position5,Position6,Position7,Position8,Position9,Position10,Position11,Position12,Position13,Position14,Position15,Position16,Position17,Position18,Position19,Position20,Season,Round")] UserPredictions userPredictions)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Position,DriverId,PossiblePoints,Season,Round")] UserPredictions userPredictions)
         {
             if (id != userPredictions.Id)
             {
@@ -207,6 +220,21 @@ namespace F1_App.Controllers
         private bool UserPredictionsExists(int id)
         {
             return _context.UserPredictions.Any(e => e.Id == id);
+        }
+
+        public int getPossiblePoints(UserPredictions up)
+        {
+            int pp;
+            int currentPosition;
+            var query = from d in _context.Driver
+                        where d.Id == up.DriverId
+                        select d.StandingsPosition;
+            currentPosition = query.FirstOrDefault();
+            //+1 point for each position move
+            pp = Math.Abs(up.Position - currentPosition);
+            //+1 point for correct answer
+            pp += 1;
+            return pp;
         }
 
         private int GetIdUserPredictions(UserPredictions up)
