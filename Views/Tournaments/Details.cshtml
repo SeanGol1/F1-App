@@ -1,0 +1,37 @@
+﻿@model F1_App.Models.Tournament
+
+@{
+    ViewData["Title"] = "Details";
+    List<Microsoft.AspNetCore.Identity.IdentityUser> userList = ViewBag.Users;
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tournament</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AdminID)
+        </dd>
+    </dl>
+
+    @foreach (Microsoft.AspNetCore.Identity.IdentityUser item in userList)
+    {
+        <h3>@(item.UserName)</h3>
+        <h3></h3>
+    }
+</div>foreach
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

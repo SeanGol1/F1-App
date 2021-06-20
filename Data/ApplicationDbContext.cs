@@ -24,6 +24,8 @@ namespace F1_App.Data
         public DbSet<UserPredictions> UserPredictions { get; set; }
         public DbSet<SystemConfig> SystemConfig { get; set; }
         public DbSet<Race> Race { get; set; }
+        public DbSet<Tournament> Tournament { get; set; }
+        public DbSet<UserTournament> UserTournament { get; set; }
 
 
 

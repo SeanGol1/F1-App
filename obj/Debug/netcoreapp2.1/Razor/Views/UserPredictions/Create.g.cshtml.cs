@@ -72,7 +72,7 @@ using F1_App.Models;
             WriteLiteral("\r\n<h2>Create</h2>\r\n\r\n<h4>UserPredictions</h4>\r\n<hr />\r\n<div class=\"row\">\r\n    \r\n    <button class=\"btn btn-primary\" onclick=\"submit()\">AJAX Submit</button>\r\n    ");
             EndContext();
             BeginContext(349, 111, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3f89442e82a449ecad16aefcf4ce752a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "53f5998f535b4cbdb485bf9338efea46", async() => {
                 BeginContext(440, 16, true);
                 WriteLiteral("View Predictions");
                 EndContext();
@@ -217,7 +217,7 @@ WriteAttributeValue("", 1534, item.Id, 1534, 8, false);
             WriteLiteral("</div>\r\n\r\n\r\n<div>\r\n    ");
             EndContext();
             BeginContext(1987, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f0f17f4e8d4a43efa1c1293589c51c34", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "46dd7732904e445392848555990e8cd7", async() => {
                 BeginContext(2009, 12, true);
                 WriteLiteral("Back to List");
                 EndContext();
