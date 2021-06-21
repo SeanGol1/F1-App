@@ -182,7 +182,7 @@ namespace F1_App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DriverExists(string id)
+        public bool DriverExists(string id)
         {
             return _context.Driver.Any(e => e.Id == id);
         }

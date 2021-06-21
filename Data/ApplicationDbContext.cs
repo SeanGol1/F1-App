@@ -26,6 +26,7 @@ namespace F1_App.Data
         public DbSet<Race> Race { get; set; }
         public DbSet<Tournament> Tournament { get; set; }
         public DbSet<UserTournament> UserTournament { get; set; }
+        public DbSet<UserPoints> UserPoints { get; set; }
 
 
 

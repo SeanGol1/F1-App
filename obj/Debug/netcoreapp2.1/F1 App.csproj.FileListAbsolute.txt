@@ -42,7 +42,6 @@ C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Races\Del
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Races\Details.g.cshtml.cs
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Races\Edit.g.cshtml.cs
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Races\Index.g.cshtml.cs
-C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\UserPredictions\Create.g.cshtml.cs
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\UserPredictions\Delete.g.cshtml.cs
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\UserPredictions\Details.g.cshtml.cs
@@ -53,3 +52,4 @@ C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Tournamen
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Tournaments\Details.g.cshtml.cs
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Tournaments\Edit.g.cshtml.cs
 C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\Razor\Views\Tournaments\Index.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs

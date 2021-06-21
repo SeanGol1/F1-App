@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "fb766245934bcd202a64ea0e475841cb2aa14547"
+    "signature": "8bdfaf7ed8ab076f36bc32ceece0978766ae3362"
   },
   "compilationOptions": {
     "defines": [
@@ -28,6 +28,7 @@
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.NETCore.App": "2.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.10",
+          "jQuery.Migrate": "3.3.0",
           "jQuery.UI.Combined": "1.12.1"
         },
         "runtime": {
@@ -37,10 +38,15 @@
           "F1_App.dll": {}
         }
       },
-      "jQuery/1.12.4": {},
+      "jQuery/3.0.0": {},
+      "jQuery.Migrate/3.3.0": {
+        "dependencies": {
+          "jQuery": "3.0.0"
+        }
+      },
       "jQuery.UI.Combined/1.12.1": {
         "dependencies": {
-          "jQuery": "1.12.4"
+          "jQuery": "3.0.0"
         }
       },
       "Microsoft.AspNetCore.Razor.Design/2.1.2": {},
@@ -3469,12 +3475,19 @@
       "serviceable": false,
       "sha512": ""
     },
-    "jQuery/1.12.4": {
+    "jQuery/3.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-pIYtWlFI5PGlJVB8jm9H96pAQ27jQhA9sCxMeGweeC3ByQRaB8BwkIuGdTt4go3IEKTmmfRC2y5k0FLFizWDQg==",
-      "path": "jquery/1.12.4",
-      "hashPath": "jquery.1.12.4.nupkg.sha512"
+      "sha512": "sha512-xFfntV19HzCtKdJWOp/XT9PUY3SslokTDDLFJZdBug36j1XVhw1+vPQ/n7Gd5y+jdpesn5B1m1yn1qIUq57jlA==",
+      "path": "jquery/3.0.0",
+      "hashPath": "jquery.3.0.0.nupkg.sha512"
+    },
+    "jQuery.Migrate/3.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mh2zwzX7RbdX0EOyyWJOjXI/IZ0l2xiWd+Tjh8ouR32PsagmyApEGRaBa7Wbj4z1rBqe1P8SF2rWims5gb4Btw==",
+      "path": "jquery.migrate/3.3.0",
+      "hashPath": "jquery.migrate.3.3.0.nupkg.sha512"
     },
     "jQuery.UI.Combined/1.12.1": {
       "type": "package",

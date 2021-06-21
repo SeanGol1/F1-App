@@ -26,6 +26,8 @@ namespace F1_App.Controllers
         public async Task<IActionResult> Index()
         {
             GetRaces();
+            SystemConfig sc = GetCurrentSeasonRound();
+            ViewBag.Round = sc.CurrentRound;
             return View(await _context.Race.ToListAsync());
         }
 
@@ -208,6 +210,12 @@ namespace F1_App.Controllers
         private bool RaceExists(string id)
         {
             return _context.Race.Any(e => e.Id == id);
+        }
+        public SystemConfig GetCurrentSeasonRound()
+        {
+            SystemConfig systemConfig = _context.SystemConfig.Find(1);
+
+            return systemConfig;
         }
     }
 }

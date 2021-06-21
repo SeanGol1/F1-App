@@ -9,7 +9,9 @@
     
 
 }
-
+<script>
+  
+</script>
 <h2>Create</h2>
 
 <h4>UserPredictions</h4>
@@ -22,7 +24,7 @@
     <div class="row">
         <h2 id="editNo">@editingNo</h2>
         <div class="col-md-6">
-            <ol class="list-group" id="DriverList">
+            <ol class="list-group ui-widget-content" id="DriverList">
                 @foreach (var item in driverList)
                 {
                     <li id="@(@item.Id)" class="list-group-item driverItem">                        
@@ -37,7 +39,9 @@
                                 <label for="RedFlag">DNF</label><br>
                             </div>
                             <div class="col-md-2">
-                                <input type="button" name="@item.Id" id="@item.Id" onClick="addDriver(this.id)" value="Add Driver" />
+                                <input type="button" name="@item.Id" id="@(item.Id)_add" onClick="addDriver(this.id)" value="Add Driver" /><br />
+                                <input type="button" name="@item.Id" id="@(item.Id)_up" onClick="moveDriverUp(this.id)" value="Move Up" /><br />
+                                <input type="button" name="@item.Id" id="@item.Id" onClick="addDriver(this.id)" value="Move Down" /><br />
                             </div>
                         </div>
                     </li>
@@ -61,17 +65,32 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+        crossorigin="anonymous"></script>
 <script>
+    
     //When Driver Is clicked add to a list.
     function addDriver(id) {
-        var node = document.getElementById(id);
+        var dId = id.substring(0, id.length-4);
+        var node = document.getElementById(dId);
 
         var list = document.getElementById("PositionList");
         list.appendChild(node);
         var item = document.createElement("p");
         $(item).attr("id", "@count");
         $(item).attr("style", "visibility:hidden;");
+        $("#PositionList").sortable();
         @(count++)
+        
+    }
+
+    function moveDriverUp(id) {
+        var node = document.getElementById(id);
+        var list = document.getElementById("PositionList");
+        list.appendChild(node);  
+        
+      
     }
 
 
