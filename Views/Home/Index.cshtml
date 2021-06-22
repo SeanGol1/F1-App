@@ -36,14 +36,22 @@
     <div class="col-md-6">
         @if (User.Identity.IsAuthenticated)
         {
-            <ul>
+
+            <h2>My Points: @ViewBag.Points</h2>
+            <ul class="list-group">
                 @foreach (var item in TourList)
                 {
                     <li>
-                        
                         <a asp-area="" asp-controller="Tournaments" asp-action="Details" asp-route-id="@item.Id"><h2>@item.Name</h2></a>
                     </li>
                 }
+            </ul>
+        }
+        else
+        {
+            <ul class="list-group">
+                <li><a class="btn btn-default" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                <li><a class="btn btn-default" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
             </ul>
         }
     </div>

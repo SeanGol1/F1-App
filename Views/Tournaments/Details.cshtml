@@ -7,30 +7,15 @@
     int count = 0;
 }
 
-<h2>Details</h2>
-
+    <h2>@Html.DisplayFor(model => model.Name)</h2>
+    <h5>Admin: @Html.DisplayFor(model => model.AdminID)</h5>
 <div>
-    <h4>Tournament</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AdminID)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AdminID)
-        </dd>
-    </dl>
+   
     <h3>Standings</h3>
 
     @foreach (var item in userPoints.OrderByDescending(u => u.Points))
     {
-        <h5><b>@(count = count + 1)</b>  @(item.UserId) - @(item.Points)</h5>
+        <h3><b>@(count = count + 1)</b>  @(item.UserName) - @(item.Points) Points</h3>
         
     }
 

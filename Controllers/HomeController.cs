@@ -31,7 +31,7 @@ namespace F1_App.Controllers
             /*Display Driver Details*/            
             var query = (from d in _context.Driver
                         orderby d.StandingsPosition
-                        select d).Take(5);
+                        select d).Take(10);
             List<Driver> driverList = query.ToList();
             ViewBag.DriverList = driverList;
 
@@ -39,13 +39,20 @@ namespace F1_App.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 /*Display user tournaments*/
-                var query2 = (from t in _context.Tournament                              
-                              select t).Take(1);
+                var query2 = (from t in _context.Tournament
+                              join ut in _context.UserTournament on t.Id equals ut.TournamentId
+                              where ut.UserId == HttpContext.User.Identity.Name
+                              select t);
                 List<Tournament> tournamentList = query2.ToList();
                 ViewBag.TournList = tournamentList;
 
-                
-                              
+                var query3 = from up in _context.UserPoints
+                             where up.UserName == HttpContext.User.Identity.Name
+                             select up.Points;
+                ViewBag.Points = query3.FirstOrDefault();
+
+
+
             }
 
             return View();
@@ -54,7 +61,7 @@ namespace F1_App.Controllers
         public IActionResult About()
         {
             CreateDriver();
-            //UpdatePoints();
+            UpdatePoints();
 
             return View();
         }
@@ -87,33 +94,72 @@ namespace F1_App.Controllers
         public void UpdatePoints()
         {
             string current = "";
+            int round = 0;
+            int season = 0;
+            int Driverno = 0;
+            int position = 0;
             String URLString = "https://ergast.com/api/f1/current/last/results";
-            Driver driver = new Driver();
+            
             SystemConfig syscon = _context.SystemConfig
                                         .FirstOrDefault(m => m.Id == 1);
+
+            
+
             XmlTextReader reader = new XmlTextReader(URLString);
             while (reader.Read())
             {
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element: // The node is an element.   
-                        if (reader.Name == "StandingsList")
+                        if (reader.Name == "Race")
                         {
                             while (reader.MoveToNextAttribute())
                             {
                                 if (reader.Name == "season")
-                                    syscon.CurrentSeason = Convert.ToInt32(reader.Value);
+                                    season = Convert.ToInt32(reader.Value);
                                 else if (reader.Name == "round")
-                                    syscon.CurrentRound = (Convert.ToInt32(reader.Value) + 1);
+                                    round = Convert.ToInt32(reader.Value);
+                            }                            
+                        }
+                        if (reader.Name == "Result")
+                        {
+                            while (reader.MoveToNextAttribute())
+                            {
+                                if (reader.Name == "number")
+                                    Driverno = Convert.ToInt32(reader.Value);
+                                else if (reader.Name == "position")
+                                    position = Convert.ToInt32(reader.Value);
                             }
-                            _context.Update(syscon);
-                            _context.SaveChanges();
+                            UpdateUserDriver(round, season,Driverno,position);
                         }
                         break;
                     case XmlNodeType.Text: //Display the text in each element.
                         break;
                 }
             }
+        }
+
+        public void UpdateUserDriver(int round, int season, int Driverno, int position)
+        {
+            var query = from up in _context.UserPredictions
+                         where up.Round == round && up.Season == season && up.Position == position
+                         select up;
+            List<UserPredictions> userPredictions = query.ToList();
+            foreach (var item in userPredictions)
+            {
+                if(item.DriverNo == Driverno)
+                {
+                    UserPoints userPoints = getUserPoints(item.UserId);
+                    userPoints.Points += item.PossiblePoints;
+                    //int temppoints = userPoints.Points;
+                    //temppoints += item.PossiblePoints;
+                    //userPoints.Points = temppoints;
+                    _context.Update(userPoints);
+                    _context.SaveChanges();
+
+                }
+            }
+
         }
 
         public void CreateDriver()
@@ -163,7 +209,6 @@ namespace F1_App.Controllers
                                 if (reader.Name == "driverId")
                                     driver.Id = reader.Value;
 
-
                             }
                         }
                         else if (reader.Name == "Constructor")
@@ -174,7 +219,7 @@ namespace F1_App.Controllers
                                     driver.TeamName = reader.Value;
                             }
                         }
-                        else if (reader.Name == "GivenName" || reader.Name == "FamilyName" || reader.Name == "Name")
+                        else if (reader.Name == "GivenName" || reader.Name == "FamilyName" || reader.Name == "Name" || reader.Name == "PermanentNumber")
                         {
                             current = reader.Name;
                         }
@@ -190,6 +235,10 @@ namespace F1_App.Controllers
                         else if (current == "FamilyName")
                         {
                             driver.FamilyName += reader.Value;
+                        }
+                        else if (current == "PermanentNumber")
+                        {
+                            driver.Number = Convert.ToInt32(reader.Value);
                         }
                         else if (current == "Name")
                         {
@@ -217,6 +266,13 @@ namespace F1_App.Controllers
         public bool DriverExists(string id)
         {
             return _context.Driver.Any(e => e.Id == id);
+        }
+        public UserPoints getUserPoints(string username)
+        {
+            var query = from up in _context.UserPoints
+                        where up.UserName == username
+                        select up;
+            return query.FirstOrDefault();
         }
     }
 }

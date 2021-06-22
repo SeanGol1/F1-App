@@ -28,7 +28,7 @@ namespace F1_App.Controllers
         // GET: Drivers
         public async Task<IActionResult> Index()
         {
-            CreateDriver();
+            //CreateDriver();
             List<Driver> model = null;
             var query = from d in _context.Driver
                         orderby d.StandingsPosition 

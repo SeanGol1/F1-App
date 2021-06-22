@@ -13,7 +13,7 @@ namespace F1_App.Models
         public int StandingsPosition { get; set; }
         public int Points { get; set; }
         public string TeamName { get; set; }
-
+        public int Number { get; set; }
         public Driver()
         {
 

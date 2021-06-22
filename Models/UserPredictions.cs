@@ -17,7 +17,7 @@ namespace F1_App.Models
         public int Season { get; set; }
         public int Round { get; set; }
         public int PossiblePoints { get; set; }
-
+        public int DriverNo { get; set; }
         public UserPredictions()
         {
           

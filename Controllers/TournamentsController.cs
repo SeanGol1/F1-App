@@ -47,7 +47,7 @@ namespace F1_App.Controllers
             foreach (var item in UserList)
             {
                 var query2 = from up in _context.UserPoints
-                             where up.UserId == item.UserName
+                             where up.UserId == item.Id
                              select up;
                 userPoints.Add(query2.FirstOrDefault());
 
@@ -78,10 +78,16 @@ namespace F1_App.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Tournament tournament)
         {
+            //When Tournament is created, Add the Admin User to UserTournaments.
+            UserTournament ut = new UserTournament();
             if (ModelState.IsValid)
             {
                 tournament.AdminID = HttpContext.User.Identity.Name;
                 _context.Add(tournament);
+                await _context.SaveChangesAsync();
+                ut.TournamentId = tournament.Id;
+                ut.UserId = HttpContext.User.Identity.Name;
+                _context.Add(ut);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

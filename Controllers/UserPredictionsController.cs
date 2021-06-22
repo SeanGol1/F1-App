@@ -87,6 +87,7 @@ namespace F1_App.Controllers
                     userPredictions.Season = SessionDetails.CurrentSeason;
                     userPredictions.Round = SessionDetails.CurrentRound;
                     userPredictions.UserId = HttpContext.User.Identity.Name;
+                    userPredictions.DriverNo = getDriverNo(item.name);
                     int newId = GetIdUserPredictions(userPredictions);
                     userPredictions.PossiblePoints = getPossiblePoints(userPredictions);
 
@@ -259,6 +260,14 @@ namespace F1_App.Controllers
             SystemConfig systemConfig = _context.SystemConfig.Find(1);
 
             return systemConfig;
+        }
+
+        public int getDriverNo(string drivername)
+        {
+            var query = from d in _context.Driver
+                        where d.Id == drivername
+                        select d.Number;
+            return query.FirstOrDefault();            
         }
     }
 }
