@@ -12,6 +12,7 @@ namespace F1_App.Models
         public int CurrentRound { get; set; }
         public bool QualifyingFin { get; set; }
         public int MyId { get; set; }
+        public bool PointsDone { get; set; }
 
         public SystemConfig()
         {

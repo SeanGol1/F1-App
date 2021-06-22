@@ -24,14 +24,14 @@ namespace F1_App.Controllers
 
             /* Display Race Details */
             List<Race> Races = _context.Race.ToList();
-            SystemConfig sc = GetCurrentSeasonRound();            
+            SystemConfig sc = GetCurrentSeasonRound();
             Race CRace = Races[sc.CurrentRound - 1];
             ViewBag.Race = CRace;
 
-            /*Display Driver Details*/            
+            /*Display Driver Details*/
             var query = (from d in _context.Driver
-                        orderby d.StandingsPosition
-                        select d).Take(10);
+                         orderby d.StandingsPosition
+                         select d).Take(10);
             List<Driver> driverList = query.ToList();
             ViewBag.DriverList = driverList;
 
@@ -61,7 +61,10 @@ namespace F1_App.Controllers
         public IActionResult About()
         {
             CreateDriver();
-            UpdatePoints();
+            SystemConfig sys = GetCurrentSeasonRound();
+            if (sys.PointsDone == false)
+                UpdatePoints();
+
 
             return View();
         }
@@ -99,11 +102,11 @@ namespace F1_App.Controllers
             int Driverno = 0;
             int position = 0;
             String URLString = "https://ergast.com/api/f1/current/last/results";
-            
+
             SystemConfig syscon = _context.SystemConfig
                                         .FirstOrDefault(m => m.Id == 1);
 
-            
+
 
             XmlTextReader reader = new XmlTextReader(URLString);
             while (reader.Read())
@@ -119,7 +122,7 @@ namespace F1_App.Controllers
                                     season = Convert.ToInt32(reader.Value);
                                 else if (reader.Name == "round")
                                     round = Convert.ToInt32(reader.Value);
-                            }                            
+                            }
                         }
                         if (reader.Name == "Result")
                         {
@@ -130,24 +133,27 @@ namespace F1_App.Controllers
                                 else if (reader.Name == "position")
                                     position = Convert.ToInt32(reader.Value);
                             }
-                            UpdateUserDriver(round, season,Driverno,position);
+                            UpdateUserDriver(round, season, Driverno, position);
                         }
                         break;
                     case XmlNodeType.Text: //Display the text in each element.
                         break;
                 }
             }
+            syscon.PointsDone = true;
+            _context.Update(syscon);
+            _context.SaveChanges();
         }
 
         public void UpdateUserDriver(int round, int season, int Driverno, int position)
         {
             var query = from up in _context.UserPredictions
-                         where up.Round == round && up.Season == season && up.Position == position
-                         select up;
+                        where up.Round == round && up.Season == season && up.Position == position
+                        select up;
             List<UserPredictions> userPredictions = query.ToList();
             foreach (var item in userPredictions)
             {
-                if(item.DriverNo == Driverno)
+                if (item.DriverNo == Driverno)
                 {
                     UserPoints userPoints = getUserPoints(item.UserId);
                     userPoints.Points += item.PossiblePoints;
