@@ -2,7 +2,9 @@
 
 @{
     ViewData["Title"] = "Details";
-    List<Microsoft.AspNetCore.Identity.IdentityUser> userList = ViewBag.Users;
+    List<Microsoft.AspNetCore.Identity.IdentityUser> userList = ViewBag.UserList;
+    List<UserPoints> userPoints = ViewBag.UserPList;
+    int count = 0;
 }
 
 <h2>Details</h2>
@@ -24,13 +26,15 @@
             @Html.DisplayFor(model => model.AdminID)
         </dd>
     </dl>
+    <h3>Standings</h3>
 
-    @foreach (Microsoft.AspNetCore.Identity.IdentityUser item in userList)
+    @foreach (var item in userPoints.OrderByDescending(u => u.Points))
     {
-        <h3>@(item.UserName)</h3>
-        <h3></h3>
+        <h5><b>@(count = count + 1)</b>  @(item.UserId) - @(item.Points)</h5>
+        
     }
-</div>foreach
+
+</div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

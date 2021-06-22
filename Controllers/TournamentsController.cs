@@ -32,17 +32,27 @@ namespace F1_App.Controllers
         [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
-
+            if (id == null)
+            {
+                return NotFound();
+            }
             var query = from ut in _context.UserTournament
                         where ut.TournamentId == id
                         join u in _context.Users on ut.UserId equals u.UserName
                         select u;
             List<IdentityUser> UserList = query.ToList();
             ViewBag.UserList = UserList;
-            if (id == null)
+
+            List<UserPoints> userPoints = new List<UserPoints>();
+            foreach (var item in UserList)
             {
-                return NotFound();
+                var query2 = from up in _context.UserPoints
+                             where up.UserId == item.UserName
+                             select up;
+                userPoints.Add(query2.FirstOrDefault());
+
             }
+            ViewBag.UserPList = userPoints;
 
             var tournament = await _context.Tournament
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -132,7 +142,7 @@ namespace F1_App.Controllers
         // GET: Tournaments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            
+
             if (id == null)
             {
                 return NotFound();

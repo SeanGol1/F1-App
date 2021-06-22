@@ -19,8 +19,7 @@ namespace F1_App.Controllers
         {
             _context = context;
         }
-
-        // GET: Races
+               
 
         // GET: Races
         public async Task<IActionResult> Index()

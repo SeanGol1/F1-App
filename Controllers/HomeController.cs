@@ -21,7 +21,33 @@ namespace F1_App.Controllers
         }
         public IActionResult Index()
         {
-            
+
+            /* Display Race Details */
+            List<Race> Races = _context.Race.ToList();
+            SystemConfig sc = GetCurrentSeasonRound();            
+            Race CRace = Races[sc.CurrentRound - 1];
+            ViewBag.Race = CRace;
+
+            /*Display Driver Details*/            
+            var query = (from d in _context.Driver
+                        orderby d.StandingsPosition
+                        select d).Take(5);
+            List<Driver> driverList = query.ToList();
+            ViewBag.DriverList = driverList;
+
+            /*If User Is Logged In*/
+            if (User.Identity.IsAuthenticated)
+            {
+                /*Display user tournaments*/
+                var query2 = (from t in _context.Tournament                              
+                              select t).Take(1);
+                List<Tournament> tournamentList = query2.ToList();
+                ViewBag.TournList = tournamentList;
+
+                
+                              
+            }
+
             return View();
         }
 
@@ -49,6 +75,13 @@ namespace F1_App.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public SystemConfig GetCurrentSeasonRound()
+        {
+            SystemConfig systemConfig = _context.SystemConfig.Find(1);
+
+            return systemConfig;
         }
 
         public void UpdatePoints()
