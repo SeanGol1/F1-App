@@ -1,23 +1,22 @@
 ﻿@model F1_App.Models.UserPredictions
 
 @{
-    ViewData["Title"] = "Create";    
+    ViewData["Title"] = "Create";
     List<Driver> driverList = ViewBag.Drivers;
     int editingNo = 0;
     int count = 1;
 
-    
+
 
 }
 <script>
-  
 </script>
 <h2>Create</h2>
 
 <h4>UserPredictions</h4>
 <hr />
 <div class="row">
-    
+
     <button class="btn btn-primary" onclick="submit()">AJAX Submit</button>
     <a class="btn btn-primary" asp-area="" asp-controller="UserPredictions" asp-action="Index">View Predictions</a>
 
@@ -27,7 +26,7 @@
             <ol class="list-group ui-widget-content" id="DriverList">
                 @foreach (var item in driverList)
                 {
-                    <li id="@(@item.Id)" class="list-group-item driverItem">                        
+                    <li id="@(@item.Id)" class="list-group-item driverItem">
                         <div class="row">
                             <div class="col-md-8">
                                 <h3><b>@item.StandingsPosition</b> - @item.GivenName @item.FamilyName</h3>
@@ -39,9 +38,9 @@
                                 <label for="RedFlag">DNF</label><br>
                             </div>
                             <div class="col-md-2">
-                                <input type="button" name="@item.Id" id="@(item.Id)_add" onClick="addDriver(this.id)" value="Add Driver" /><br />
-                                <input type="button" name="@item.Id" id="@(item.Id)_up" onClick="moveDriverUp(this.id)" value="Move Up" /><br />
-                                <input type="button" name="@item.Id" id="@item.Id" onClick="addDriver(this.id)" value="Move Down" /><br />
+                                <input type="button" name="@(item.Id)_movebtn" id="@(item.Id)_add" onClick="addDriver(this.id)" value="Add Driver" /><br />
+                                <input type="button" name="@(item.Id)_nav" id="@(item.Id)_up" onClick="moveDriverUp(this.id)" value="Move Up" style="visibility:hidden;" /><br />
+                                <input type="button" name="@(item.Id)_nav" id="@(item.Id)_down" onClick="moveDriverDown(this.id)" value="Move Down" style="visibility:hidden;"/><br />
                             </div>
                         </div>
                     </li>
@@ -53,12 +52,9 @@
         </div>
 
     </div>
-    @*<input type="submit" value="Create" class="btn btn-default" />
 
 
 
-
-        </form>*@
 </div>
 
 
@@ -69,36 +65,54 @@
         integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
         crossorigin="anonymous"></script>
 <script>
-    
+
     //When Driver Is clicked add to a list.
     function addDriver(id) {
-        var dId = id.substring(0, id.length-4);
+        var button = document.getElementById(id);
+        var dId = id.substring(0, id.length - 4);
         var node = document.getElementById(dId);
+        var btns = document.getElementsByClassName(dId + '_nav');
+        var btnVal = $(button).val();
 
-        var list = document.getElementById("PositionList");
-        list.appendChild(node);
-        var item = document.createElement("p");
-        $(item).attr("id", "@count");
-        $(item).attr("style", "visibility:hidden;");
-        $("#PositionList").sortable();
-        @(count++)
-        
+        //If Driver has not been added, Add to Right list. 
+        if (btnVal == 'Add Driver') {
+            $(button).val('Remove Driver');
+            document.getElementById(dId + "_up").style.visibility = "visible";
+            document.getElementById(dId + "_down").style.visibility = "visible";
+            var list = document.getElementById("PositionList");
+            list.appendChild(node);
+        }
+        //If Driver has been added, Remove and add back to left list. 
+        else {
+            $(button).val('Add Driver');    
+            document.getElementById(dId + "_up").style.visibility = "hidden";
+            document.getElementById(dId + "_down").style.visibility = "hidden";
+            var list = document.getElementById("DriverList");
+            list.insertBefore(node, list.firstChild);
+            //list.appendChild(node);
+        }
     }
 
     function moveDriverUp(id) {
-        var node = document.getElementById(id);
+        var dId = id.substring(0, id.length - 3);
+        var node = document.getElementById(dId);
         var list = document.getElementById("PositionList");
-        list.appendChild(node);  
-        
-      
+        before = $(node).prev();
+        $(node).insertBefore(before);
+    }
+
+    function moveDriverDown(id) {
+        var dId = id.substring(0, id.length - 5);
+        var node = document.getElementById(dId);
+        var list = document.getElementById("PositionList");
+        before = $(node).next();
+        $(node).insertAfter(before);
     }
 
 
-
     function submit() {
-        
-        var allData = [];
 
+        var allData = [];
 
         $('#PositionList li').each(function (i) {
             var data = {};
@@ -109,7 +123,7 @@
             allData.push(data);
         });
 
-        
+
         $.ajax({
             type: "POST",
             url: "/UserPredictions/getPosList",
@@ -131,10 +145,10 @@
             type: "GET",
             url: "/UserPredictions/Index",
             success: function () {
-                
+
                 //alert(data.Result);
             }
-            
+
         });
     }
 </script>

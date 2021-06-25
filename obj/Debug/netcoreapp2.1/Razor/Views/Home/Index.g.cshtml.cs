@@ -215,7 +215,7 @@ WriteAttributeValue("", 544, @item.Id, 544, 11, false);
             WriteLiteral("                    <li>\r\n                        ");
             EndContext();
             BeginContext(1465, 112, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e4894907b8aa4d42be3ffcd38ab8468f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bd07d0d358a34f989f89ea2cce56918e", async() => {
                 BeginContext(1554, 4, true);
                 WriteLiteral("<h2>");
                 EndContext();
@@ -282,7 +282,7 @@ WriteAttributeValue("", 544, @item.Id, 544, 11, false);
             WriteLiteral("            <ul class=\"list-group\">\r\n                <li>");
             EndContext();
             BeginContext(1737, 88, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "24017965e11f4a5fa87f0d5b7b0bafda", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b377d50fa97b429bbb88ee5ab56e9d7e", async() => {
                 BeginContext(1813, 8, true);
                 WriteLiteral("Register");
                 EndContext();
@@ -307,7 +307,7 @@ WriteAttributeValue("", 544, @item.Id, 544, 11, false);
             WriteLiteral("</li>\r\n                <li>");
             EndContext();
             BeginContext(1852, 82, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8d8f696b81c14f5f91b0381e9f54be2a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bb6c661e05445d9b1b196f94b6a7ad6", async() => {
                 BeginContext(1925, 5, true);
                 WriteLiteral("Login");
                 EndContext();
