@@ -13,6 +13,7 @@ namespace F1_App.Models
         public bool QualifyingFin { get; set; }
         public int MyId { get; set; }
         public bool PointsDone { get; set; }
+        public string DriveroftheDay { get; set; }
 
         public SystemConfig()
         {

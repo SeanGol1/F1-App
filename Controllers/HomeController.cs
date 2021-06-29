@@ -64,15 +64,21 @@ namespace F1_App.Controllers
             SystemConfig sys = GetCurrentSeasonRound();
             if (sys.PointsDone == false)
                 UpdatePoints();
-
-
             return View();
         }
-
-        public IActionResult Contact()
+        
+        
+        public IActionResult Contact(string driver)
         {
-            ViewData["Message"] = "Your contact page.";
-
+            ViewData["Message"] = "Driver of the Day:" + driver;
+            string[] names = driver.Split(' ');
+            SystemConfig sys = GetCurrentSeasonRound();
+            var query = from d in _context.Driver
+                        where d.GivenName == names[0] && d.FamilyName == names[1]
+                        select d.Id;
+            sys.DriveroftheDay = query.FirstOrDefault();
+            _context.Update(sys);
+            _context.SaveChanges();
             return View();
         }
 
