@@ -18,8 +18,8 @@
 <div class="row">
 
     <button class="btn btn-primary" onclick="submit()">AJAX Submit</button>
-    <a class="btn btn-primary" asp-area="" asp-controller="UserPredictions" asp-action="Index">View Predictions</a>
-
+    <a class="btn btn-primary" asp-controller="UserPredictions" asp-action="ViewList" asp-route-id="@ViewBag.CUser">View Predictions</a>
+    
     <div class="row">
         <h2 id="editNo">@editingNo</h2>
         <div class="col-md-6">
@@ -33,14 +33,18 @@
                                 <h4>@item.TeamName</h4>
                                 <h5>@item.Points Points</h5>
                             </div>
-                            <div class="col-md-2">
-                                <input type="checkbox" id="@(item)_check" name="RedFlag" value="Red Flag">
+                            <div class="col-md-1">
+                                <input type="checkbox" id="@(item)_checkdnf" name="RedFlag" value="Red Flag">
                                 <label for="RedFlag">DNF</label><br>
+                            </div>
+                            <div class="col-md-1">
+                                <input type="radio" id="@(item)_checkdotd" name="dotd" value="dotd">
+                                <label for="dotd">Driver of the Day</label><br>
                             </div>
                             <div class="col-md-2">
                                 <input type="button" name="@(item.Id)_movebtn" id="@(item.Id)_add" onClick="addDriver(this.id)" value="Add Driver" /><br />
                                 <input type="button" name="@(item.Id)_nav" id="@(item.Id)_up" onClick="moveDriverUp(this.id)" value="Move Up" style="visibility:hidden;" /><br />
-                                <input type="button" name="@(item.Id)_nav" id="@(item.Id)_down" onClick="moveDriverDown(this.id)" value="Move Down" style="visibility:hidden;"/><br />
+                                <input type="button" name="@(item.Id)_nav" id="@(item.Id)_down" onClick="moveDriverDown(this.id)" value="Move Down" style="visibility:hidden;" /><br />
                             </div>
                         </div>
                     </li>
@@ -138,7 +142,24 @@
 
 
 
-        }
+    }
+
+    function getPredictions() {
+        var data = {};
+        data.name = "@ViewBag.CUser";
+        data.season = 0;
+        data.round = 0;
+         $.ajax({
+            type: "POST",
+            url: "/UserPredictions/ViewList",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
+            success: function () {                
+                
+            },
+            dataType: "json"
+        });
+    }
 
     function sendToIndex() {
             $.ajax({

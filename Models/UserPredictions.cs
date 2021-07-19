@@ -18,6 +18,7 @@ namespace F1_App.Models
         public int Round { get; set; }
         public int PossiblePoints { get; set; }
         public int DriverNo { get; set; }
+        public bool Correct { get; set; }
         public UserPredictions()
         {
           

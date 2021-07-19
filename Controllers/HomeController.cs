@@ -153,19 +153,27 @@ namespace F1_App.Controllers
 
         public void UpdateUserDriver(int round, int season, int Driverno, int position)
         {
+            SystemConfig syscon = _context.SystemConfig
+                                        .FirstOrDefault(m => m.Id == 1);
             var query = from up in _context.UserPredictions
                         where up.Round == round && up.Season == season && up.Position == position
                         select up;
             List<UserPredictions> userPredictions = query.ToList();
             foreach (var item in userPredictions)
             {
-                if (item.DriverNo == Driverno)
+                UserPoints userPoints = getUserPoints(item.UserId);
+                if (item.DriverId == syscon.DriveroftheDay)
                 {
-                    UserPoints userPoints = getUserPoints(item.UserId);
+                    userPoints.Points += 3;
+                }
+                if (item.DriverNo == Driverno)
+                {                    
                     userPoints.Points += item.PossiblePoints;
+                    item.Correct = true;
                     //int temppoints = userPoints.Points;
                     //temppoints += item.PossiblePoints;
                     //userPoints.Points = temppoints;
+                    _context.Update(item);
                     _context.Update(userPoints);
                     _context.SaveChanges();
 

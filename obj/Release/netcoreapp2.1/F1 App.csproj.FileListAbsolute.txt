@@ -1,0 +1,55 @@
+C:\Users\seang\source\repos\F1 App\bin\Release\netcoreapp2.1\F1_App.deps.json
+C:\Users\seang\source\repos\F1 App\bin\Release\netcoreapp2.1\F1_App.runtimeconfig.json
+C:\Users\seang\source\repos\F1 App\bin\Release\netcoreapp2.1\F1_App.runtimeconfig.dev.json
+C:\Users\seang\source\repos\F1 App\bin\Release\netcoreapp2.1\F1_App.dll
+C:\Users\seang\source\repos\F1 App\bin\Release\netcoreapp2.1\F1_App.pdb
+C:\Users\seang\source\repos\F1 App\bin\Release\netcoreapp2.1\F1_App.Views.dll
+C:\Users\seang\source\repos\F1 App\bin\Release\netcoreapp2.1\F1_App.Views.pdb
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1 App.csproj.CoreCompileInputs.cache
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1 App.RazorAssemblyInfo.cache
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1 App.RazorAssemblyInfo.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1 App.AssemblyInfoInputs.cache
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1 App.AssemblyInfo.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1_App.TagHelpers.input.cache
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1_App.TagHelpers.output.cache
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1 App.RazorCoreGenerate.cache
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Drivers\Create.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Drivers\Delete.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Drivers\Details.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Drivers\Edit.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Drivers\Index.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Home\About.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Home\Contact.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Home\Index.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Home\Privacy.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Races\Create.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Races\Delete.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Races\Details.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Races\Edit.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Races\Index.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Shared\Error.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Shared\_Layout.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Shared\_LoginPartial.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Tournaments\Create.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Tournaments\Delete.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Tournaments\Details.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Tournaments\Edit.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\Tournaments\Index.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\UserPredictions\Create.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\UserPredictions\Delete.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\UserPredictions\Details.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\UserPredictions\Edit.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\UserPredictions\Index.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\_ViewImports.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\Razor\Views\_ViewStart.g.cshtml.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1 App.RazorTargetAssemblyInfo.cache
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1 App.RazorTargetAssemblyInfo.cs
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1_App.Views.pdb
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1_App.dll
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1_App.pdb
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1 App.csproj.CopyComplete
+C:\Users\seang\source\repos\F1 App\obj\Release\netcoreapp2.1\F1 App.csprojAssemblyReference.cache

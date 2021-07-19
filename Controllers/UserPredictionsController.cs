@@ -34,6 +34,26 @@ namespace F1_App.Controllers
             return View(model);
         }
 
+        public class ListData
+        {
+            public string name { get; set; }
+        }
+        // GET: UserPredictions/ViewList/2
+        [HttpGet]
+        public async Task<IActionResult> ViewList(string id)
+        {
+            List<UserPredictions> model = null;
+            SystemConfig SessionDetails = GetCurrentSeasonRound();          
+
+            var query = from u in _context.UserPredictions
+                        where u.UserId == id && u.Season == SessionDetails.CurrentSeason && u.Round == SessionDetails.CurrentRound
+                        orderby u.Position
+                        select u;
+
+            model = query.ToList();
+            return View("ViewList" , model);
+        }
+
         // GET: UserPredictions/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -62,6 +82,7 @@ namespace F1_App.Controllers
                         select d;
             model = query.ToList();
             ViewBag.Drivers = model;
+            ViewBag.CUser = HttpContext.User.Identity.Name; 
 
             return View();
         }

@@ -1,0 +1,90 @@
+﻿@model IEnumerable<F1_App.Models.UserPredictions>
+
+@{
+    ViewData["Title"] = "ViewList";
+}
+
+    <div class="row">
+
+        <div class="col-lg-3">
+            <h2>ViewList</h2>
+
+            <p>
+                <a asp-action="Create">Create New</a>
+            </p>
+        </div>
+        <div class="col-lg-6">
+            <h3>Filter</h3>
+            <label for="Round">Round:</label>
+            <select name="Round">
+                @for (int i = 0; i < 21; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+            <label for="Season">Season:</label>
+            <select name="Season">
+                @for (int i = 2020; i < 2022; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+        </div>
+        
+    </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DriverId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Season)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Round)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PossiblePoints)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Correct)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                <b>@Html.DisplayFor(modelItem => item.DriverNo).</b>   @Html.DisplayFor(modelItem => item.DriverId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Season)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Round)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PossiblePoints)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Correct)
+            </td>
+            <td>
+                
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
